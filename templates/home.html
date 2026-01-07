@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Home | PrepEdge{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Master Your Next <span style="color: var(--primary);">Interview</span></h1>
+    <p class="tagline">
+        The ultimate platform to practice coding interviews, track your progress, and build the confidence you need to
+        land your dream job.
+    </p>
+
+    <div class="actions">
+        <a href="/mock">
+            <button>
+                <span>🚀</span> Start Mock Interview
+            </button>
+        </a>
+
+        <a href="/questions">
+            <button class="secondary">
+                <span>📚</span> Explore Questions
+            </button>
+        </a>
+    </div>
+</div>
+
+<div class="container"
+    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+    <div class="card">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎯</div>
+        <h3>Targeted Practice</h3>
+        <p style="color: var(--text-muted); text-align: center;">Curated list of questions from top tech companies.</p>
+    </div>
+    <div class="card">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📈</div>
+        <h3>Track Progress</h3>
+        <p style="color: var(--text-muted); text-align: center;">Visualize your growth with detailed performance
+            metrics.</p>
+    </div>
+    <div class="card">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
+        <h3>Real-time Feedback</h3>
+        <p style="color: var(--text-muted); text-align: center;">Get instant insights to improve your performance.</p>
+    </div>
+</div>
+{% endblock %}

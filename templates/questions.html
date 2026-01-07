@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Question Bank | PrepEdge{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <header style="margin-bottom: 2rem;">
+        <h1 style="font-size: 2rem;">Question Bank</h1>
+        <p style="color: var(--text-muted);">Browse through our curated list of interview questions.</p>
+    </header>
+
+    <div class="filters"
+        style="display: flex; gap: 0.75rem; margin-bottom: 2.5rem; overflow-x: auto; padding-bottom: 0.5rem;">
+        <a href="/questions" class="filter-btn"
+            style="padding: 0.5rem 1.25rem; background: var(--primary); color: white; border-radius: 9999px; text-decoration: none; font-size: 0.875rem; font-weight: 500;">All</a>
+        <a href="/questions?category=HR" class="filter-btn"
+            style="padding: 0.5rem 1.25rem; background: white; border: 1px solid var(--border); color: var(--text-main); border-radius: 9999px; text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: var(--transition);">HR</a>
+        <a href="/questions?category=Technical" class="filter-btn"
+            style="padding: 0.5rem 1.25rem; background: white; border: 1px solid var(--border); color: var(--text-main); border-radius: 9999px; text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: var(--transition);">Technical</a>
+    </div>
+
+    <div style="display: grid; gap: 1rem;">
+        {% for category, question in questions %}
+        <div class="question-card"
+            style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem;">
+            <span class="badge">{{ category }}</span>
+            <p style="font-size: 1.125rem; font-weight: 500; line-height: 1.6;">{{ question }}</p>
+            <div style="width: 100%; display: flex; justify-content: flex-end; margin-top: 0.5rem;">
+                <button class="secondary" style="padding: 0.4rem 1rem; font-size: 0.875rem;">View Details</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

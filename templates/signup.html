@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up | PrepEdge{% endblock %}
+
+{% block content %}
+<div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+    <div class="auth-box">
+        <h1>Create Account</h1>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Join PrepEdge and accelerate your career.</p>
+
+        {% if error %}
+        <div
+            style="background-color: #fee2e2; color: #dc2626; padding: 0.75rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.875rem;">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            <div style="text-align: left; margin-bottom: 1rem;">
+                <label
+                    style="display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-main);">Username</label>
+                <input type="text" name="username" placeholder="Choose a username" required>
+            </div>
+            <div style="text-align: left; margin-bottom: 1.5rem;">
+                <label
+                    style="display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-main);">Password</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" style="width: 100%;">Create Account</button>
+        </form>
+
+        <p style="margin-top: 2rem; font-size: 0.875rem; color: var(--text-muted);">
+            Already have an account? <a href="/login"
+                style="color: var(--primary); font-weight: 600; text-decoration: none;">Sign in</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
