@@ -32,7 +32,7 @@ def login():
 
         if user:
             session["user"] = username
-            session["role"] = user[3]
+            session["role"] = user[3] if len(user) > 3 else "aspirant"
             return redirect(url_for("dashboard"))
         else:
             error = "Invalid username or password"
@@ -74,6 +74,12 @@ def mock():
 
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
+
+    try:
+        cursor.execute("UPDATE users SET mock_count = mock_count + 1 WHERE username=?", (session["user"],))
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass
 
     cursor.execute("SELECT question FROM questions")
     questions = cursor.fetchall()
@@ -140,7 +146,26 @@ def progress():
     if "user" not in session:
         return redirect(url_for("login"))
 
-    return render_template("progress.html")
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("SELECT mock_count, role FROM users WHERE username=?", (session["user"],))
+        user_row = cursor.fetchone()
+        mock_count = user_row[0] if user_row and user_row[0] is not None else 0
+        role = user_row[1] if user_row else "aspirant"
+    except sqlite3.OperationalError:
+        mock_count = 0
+        role = "aspirant"
+
+    cursor.execute("SELECT COUNT(*) FROM questions")
+    total_questions = cursor.fetchone()[0]
+    conn.close()
+
+    percentage = min(int((mock_count / total_questions) * 100), 100) if total_questions > 0 else 0
+    level = "Expert" if mock_count >= 15 else "Intermediate" if mock_count >= 5 else "Beginner"
+
+    return render_template("progress.html", mock_count=mock_count, total_questions=total_questions, percentage=percentage, level=level, role=role)
 
 @app.route("/logout")
 def logout():

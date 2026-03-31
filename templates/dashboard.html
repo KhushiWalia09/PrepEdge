@@ -7,7 +7,8 @@
     <header style="margin-bottom: 3rem;">
         <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Welcome back!</h1>
         <p style="color: var(--text-muted); font-size: 1.125rem;">
-            Logged in as <span style="color: var(--primary); font-weight: 600;">{{ session.get("role")|capitalize
+            Logged in as <span style="color: var(--primary); font-weight: 600;">{{ session.get("role") |
+                default("Aspirant") | capitalize
                 }}</span>. Ready for your next session?
         </p>
     </header>

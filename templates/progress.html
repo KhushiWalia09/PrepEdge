@@ -3,23 +3,56 @@
 {% block title %}Progress | PrepEdge{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 800px; margin: 4rem auto; text-align: center;">
-    <header style="margin-bottom: 3rem;">
-        <div style="font-size: 4rem; margin-bottom: 1rem;">📊</div>
-        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Your Progress</h1>
-        <p style="color: var(--text-muted); font-size: 1.125rem;">We're building a comprehensive dashboard to help you
-            visualize your growth.</p>
+<div class="container" style="max-width: 900px; margin: 4rem auto;">
+    <header style="margin-bottom: 3rem; text-align: center;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;" class="reveal">Your Performance</h1>
+        <p style="color: var(--text-muted); font-size: 1.125rem;" class="reveal">Track your interview preparation
+            journey.</p>
     </header>
 
-    <div class="card" style="padding: 3rem; border-style: dashed;">
-        <h2 style="margin-bottom: 1.5rem;">Coming Soon</h2>
-        <p style="color: var(--text-muted);">Soon you'll be able to see your interview scores, time spent practicing,
-            and areas for improvement.</p>
-        <div style="margin-top: 2.5rem;">
-            <a href="/dashboard">
-                <button class="secondary">Back to Dashboard</button>
-            </a>
+    <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="card reveal" style="align-items: flex-start; text-align: left;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎯</div>
+            <span style="font-size: 1.125rem; color: var(--text-muted);">Questions Practiced</span>
+            <h2 style="font-size: 2.5rem; color: var(--text-main); margin-top: 0.5rem;">{{ mock_count }} <span
+                    style="font-size: 1.25rem; color: var(--text-muted);">/ {{ total_questions }}</span></h2>
         </div>
+        <div class="card reveal" style="align-items: flex-start; text-align: left;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⭐</div>
+            <span style="font-size: 1.125rem; color: var(--text-muted);">Current Skill Level</span>
+            <h2 style="font-size: 2.5rem; color: var(--primary); margin-top: 0.5rem;">{{ level }}</h2>
+        </div>
+        <div class="card reveal" style="align-items: flex-start; text-align: left;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">👤</div>
+            <span style="font-size: 1.125rem; color: var(--text-muted);">Status Badge</span>
+            <h2 style="font-size: 2.5rem; color: var(--accent); margin-top: 0.5rem; text-transform: capitalize;">{{ role
+                }}</h2>
+        </div>
+    </div>
+
+    <div class="card reveal" style="margin-top: 2rem; align-items: stretch; text-align: left;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem;">
+            <h3 style="font-size: 1.25rem;">Preparation Progress</h3>
+            <span style="font-weight: 600; color: var(--primary);">{{ percentage }}%</span>
+        </div>
+        <div
+            style="width: 100%; height: 12px; background-color: var(--border); border-radius: 999px; overflow: hidden;">
+            <div
+                style="height: 100%; width: {{ percentage }}%; background: linear-gradient(to right, #818cf8, #c084fc); border-radius: 999px; transition: width 1s ease-out;">
+            </div>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 1rem;">
+            {% if percentage >= 100 %} Amazing work! You've seen all our current questions. Check back for more soon!
+            {% elif percentage >= 50 %} You're halfway there! Keep up the good momentum and build up that skill.
+            {% else %} You've just started your journey. Practice makes perfect, head back to the mock interview! {%
+            endif %}
+        </p>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;" class="reveal">
+        <a href="/mock">
+            <button>Resume Practice</button>
+        </a>
     </div>
 </div>
 {% endblock %}
